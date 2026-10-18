@@ -22,7 +22,7 @@ print(f"Utilisation du périphérique : {device}")
 try:
     model = models.resnet18(weights=None)
     model.fc = nn.Linear(model.fc.in_features, 3) # benign, malignant, normal
-    model.load_state_dict(torch.load("model_resnet18.pth", map_location=device))
+    model.load_state_dict(torch.load("checkpoints/model_resnet18.pth", map_location=device))
     model.to(device)
     model.eval()
     print("Modèle ResNet-18 chargé avec succès !")

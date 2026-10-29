@@ -1,27 +1,19 @@
-# 🩺 Détection Précoce du Cancer du Sein par Échographie (Deep Learning, Edge AI & XAI)
+# 🩺 Système de Diagnostic Précoce du Cancer du Sein (Edge AI)
 
-Ce projet s'inscrit dans le cadre d'un travail de recherche de Master en Génie Informatique. Il implémente un système d'aide au diagnostic médical basé sur l'apprentissage profond (**Deep Learning**) pour la classification d'images d'échographie mammaire (classes : *Benign*, *Malignant*, *Normal*). L'approche met un accent particulier sur l'embarquabilité sur dispositifs portables (**Edge AI / TinyML**), l'optimisation méta-heuristique (**PSO**) et l'explicabilité médicale (**XAI / Grad-CAM**).
-
+Système intelligent et embarquable de classification d'imagerie médicale (échographies et mammographies) basé sur une architecture **ResNet-18** avec **Transfer Learning**, optimisé pour l'inférence ultra-rapide sur la périphérie (**Edge AI** via ONNX Runtime).
 ---
 
-## 📂 Architecture du Projet
+## 🏗️ Architecture du Projet
 
+Le projet adopte une architecture logicielle centralisée et épurée de niveau ingénieur :
 ```text
-Meme Kanseri Tespiti/
-├── checkpoints/
-│   ├── model_resnet18.pth             # Modèle de base entraîné (FP32)
-│   └── model_resnet18_quantized.pth   # Modèle optimisé et quantifié (INT8)
-├── data/                              # Jeux de données (train / test structurés par classes)
-│   ├── train/                         # benign, malignant, normal
-│   └── test/                          # benign, malignant, normal
-├── venv/                              # Environnement virtuel Python
-├── .gitignore                         # Fichiers ignorés par Git
-├── evaluate_cnn.py                    # Script d'évaluation et métriques de performance (Matrice de confusion)
-├── grad_cam.py                        # Module d'explicabilité XAI (Génération automatique des cartes Grad-CAM)
-├── main.py                            # Pipeline principal d'entraînement et d'évaluation
-├── models.py                          # Définition des architectures de réseaux de neurones
-├── optimize_edge.py                   # Script d'optimisation Edge AI (Quantification PTQ)
-├── prepare_data.py                    # Prétraitement et normalisation des échographies
-├── pso_optimizer.py                   # Optimisation par essaim de particules (PSO) pour les hyperparamètres
-├── README.md                          # Documentation du projet
-└── requirements.txt                   # Dépendances et bibliothèques du projet
+├── checkpoints/              # Poids PyTorch (.pth) et modèle optimisé ONNX (.onnx)
+├── data/                     # Jeux de données d'entraînement et de test
+│   ├── train/                # Dossier des images d'entraînement (benign, malignant)
+│   └── test/                 # Dossier des images de test
+├── venv/                     # Environnement virtuel Python
+├── main.py                   # Script maître unique (CLI) pour tout le pipeline
+├── app.py                    # Interface web interactive (Streamlit)
+├── gesture_detection.py      # Scanner vidéo interactif en temps réel (OpenCV / PyTorch)
+├── requirements.txt          # Dépendances du projet
+└── README.md                 # Documentation technique
